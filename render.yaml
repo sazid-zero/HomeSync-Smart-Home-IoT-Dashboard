@@ -1,0 +1,17 @@
+services:
+  # The Node Backend
+  - type: web
+    name: homesync-backend
+    env: node
+    buildCommand: cd server && npm install && npm run build
+    startCommand: cd server && npm start
+    envVars:
+      - key: PORT
+        value: 5000
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CLIENT_URL
+        sync: false
+        # Example value: https://homesync-dashboard.netlify.app

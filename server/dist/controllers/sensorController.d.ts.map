@@ -1,0 +1,1 @@
+{"version":3,"file":"sensorController.d.ts","sourceRoot":"","sources":["../../src/controllers/sensorController.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,QAAQ,EAAE,YAAY,EAAE,MAAM,SAAS,CAAC;AAG1D,eAAO,MAAM,gBAAgB;qBACJ,OAAO,OAAO,QAAQ,QAAQ,YAAY;sBAazC,OAAO,OAAO,QAAQ,QAAQ,YAAY;uBAQzC,OAAO,OAAO,QAAQ,QAAQ,YAAY;CAMpE,CAAC"}
