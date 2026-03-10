@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export const CTASection: React.FC = () => {
     return (
         <section className="py-24 px-6">
-            <div className="max-w-7xl mx-auto">
+            <div className="max-w-[1280px] mx-auto">
                 <div className="relative rounded-[3rem] bg-gradient-to-br from-cyan-600 to-blue-700 p-12 md:p-24 overflow-hidden shadow-2xl shadow-cyan-500/20">
                      <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
                          <div className="absolute top-[-20%] right-[-10%] w-96 h-96 bg-white blur-[100px] rounded-full"></div>
@@ -39,7 +39,7 @@ export const CTASection: React.FC = () => {
 export const LandingFooter: React.FC = () => {
     return (
         <footer className="footer-bg pt-20 pb-10 border-t theme-border theme-bg-secondary">
-            <div className="max-w-7xl mx-auto px-6">
+            <div className="max-w-[1280px] mx-auto px-6">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
                     <div className="col-span-1 md:col-span-1 space-y-6">
                         <div className="flex items-center space-x-2">

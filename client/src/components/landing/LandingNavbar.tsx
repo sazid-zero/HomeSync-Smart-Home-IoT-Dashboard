@@ -22,7 +22,7 @@ export const LandingNavbar: React.FC = () => {
             ? 'py-4 theme-card-bg/80 backdrop-blur-xl border-b theme-border shadow-lg' 
             : 'py-6 bg-transparent'
         }`}>
-            <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+            <div className="max-w-[1280px] mx-auto px-6 flex items-center justify-between">
                 <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
                     <div className="w-8 h-8 rounded-lg bg-cyan-500 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-cyan-500/20">H</div>
                     <span className="text-xl font-bold tracking-tight theme-text-primary">HomeSync</span>

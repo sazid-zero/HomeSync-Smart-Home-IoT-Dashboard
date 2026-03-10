@@ -77,6 +77,31 @@ npm run dev
 
 ---
 
+## 🚀 Deployment Guide
+
+This application is designed for a split-deployment architecture: **Netlify** for the frontend and **Render** for the backend.
+
+### 🎨 Frontend: Netlify
+1. **Connect Repo**: Select your GitHub repository.
+2. **Base Directory**: `client`
+3. **Build Command**: `npm run build`
+4. **Publish Directory**: `dist`
+5. **Environment Variables**:
+   - `VITE_API_URL`: Your Render service URL **with /api suffix** (e.g., `https://homesync-smart-home-iot-dashboard.onrender.com/api`)
+
+### ⚙️ Backend: Render
+1. **Service Type**: Web Service.
+2. **Root Directory**: `server`
+3. **Build Command**: `npm install && npm run build`
+4. **Start Command**: `npm start`
+5. **Environment Variables**:
+   - `DATABASE_URL`: Your PostgreSQL connection string (Neon.tech recommended).
+   - `JWT_SECRET`: A long secure random string.
+   - `CLIENT_URL`: Your Netlify site URL (e.g., `https://your-site.netlify.app`).
+   - `PORT`: `5000`
+
+---
+
 ## 📖 IoT Implementation Details
 
 ### The Simulated Environment

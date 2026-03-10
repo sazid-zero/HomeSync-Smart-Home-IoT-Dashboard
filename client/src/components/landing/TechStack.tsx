@@ -44,7 +44,7 @@ export const TechStack: React.FC = () => {
 
     return (
         <section className="py-24 theme-bg-secondary overflow-hidden">
-            <div className="max-w-7xl mx-auto px-6 mb-16 text-center lg:text-left">
+            <div className="max-w-[1280px] mx-auto px-6 mb-16 text-center lg:text-left">
                 <h2 className="text-xs font-bold text-cyan-500 uppercase tracking-[0.4em] mb-4">The Engine Room</h2>
                 <h3 className="text-4xl md:text-5xl font-black theme-text-primary tracking-tight">
                     Powered by a <br />
