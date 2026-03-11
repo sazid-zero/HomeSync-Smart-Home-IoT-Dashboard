@@ -177,17 +177,16 @@ const PowerConsumption: React.FC<{ devices: Device[] }> = ({ devices }) => {
 const Occupant: React.FC = () => {
     const { user } = useAuth();
     
-    const data = [
+    // In a production environment, this would be fetched from a /members or /family endpoint
+    // For now, we show the current user and placeholders for other potential family members
+    const occupants = [
         { 
             id: 'owner', 
             name: user?.name || "Owner", 
             role: "Owner", 
             imgSrc: user?.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.name || 'User')}&background=8b5cf6&color=fff&bold=true`, 
             active: true 
-        },
-        { id: 2, name: "Juthi", role: "Family", imgSrc: "/profile/sharmin.jpg", active: true },
-        { id: 3, name: "Shafayat", role: "Family", imgSrc: "/profile/shafayat.jpg", active: false },
-        { id: 4, name: "Jui", role: "Guest", imgSrc: "/profile/jui.jpg", active: false }
+        }
     ];
 
     return (
@@ -208,11 +207,11 @@ const Occupant: React.FC = () => {
                         <p className="text-[10px] theme-text-tertiary font-medium">Currently at home</p>
                     </div>
                 </div>
-                <button className="text-[10px] font-black theme-text-secondary uppercase tracking-widest hover:text-purple-500 transition-colors">See All →</button>
+                <button className="text-[10px] font-black theme-text-secondary uppercase tracking-widest hover:text-purple-500 transition-colors">Manage →</button>
             </div>
 
             <div className="grid grid-cols-4 gap-4 relative z-10">
-                {data.map((item) => (
+                {occupants.map((item) => (
                     <div key={item.id} className="flex flex-col items-center group/item cursor-pointer">
                         <div className="relative mb-2">
                              <img src={item.imgSrc} alt={item.name} className="w-14 h-14 rounded-2xl object-cover theme-border border transition-transform group-hover/item:scale-105" />
@@ -224,11 +223,19 @@ const Occupant: React.FC = () => {
                         <span className="text-[8px] font-medium theme-text-tertiary uppercase tracking-tighter">{item.role}</span>
                     </div>
                 ))}
-                <div className="flex flex-col items-center">
-                    <button className="w-14 h-14 theme-bg-tertiary rounded-2xl flex items-center justify-center group/btn hover:theme-bg-primary transition-all border border-dashed theme-border">
-                        <span className="text-2xl font-light theme-text-secondary group-hover/btn:scale-125 transition-transform">+</span>
-                    </button>
-                    <span className="text-[10px] font-bold theme-text-tertiary mt-2">Add</span>
+                
+                {/* Placeholders for new users */}
+                <div className="flex flex-col items-center group/btn cursor-pointer">
+                    <div className="w-14 h-14 theme-bg-tertiary rounded-2xl flex items-center justify-center border border-dashed theme-border group-hover/btn:theme-bg-primary transition-all">
+                        <span className="text-xl font-light theme-text-secondary group-hover/btn:scale-125 transition-transform">+</span>
+                    </div>
+                    <h4 className="text-[10px] font-bold theme-text-tertiary mt-2">Invite</h4>
+                </div>
+                
+                <div className="flex flex-col items-center opacity-40 grayscale pointer-events-none hidden sm:flex">
+                    <div className="w-14 h-14 theme-bg-tertiary rounded-2xl flex items-center justify-center border border-dashed theme-border">
+                    </div>
+                    <span className="text-[8px] font-medium theme-text-tertiary mt-2 uppercase">Empty</span>
                 </div>
             </div>
         </div>

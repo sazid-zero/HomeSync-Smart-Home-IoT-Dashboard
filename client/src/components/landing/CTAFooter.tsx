@@ -51,7 +51,7 @@ export const LandingFooter: React.FC = () => {
                         </p>
                         <div className="flex space-x-4">
                              {['tw', 'fb', 'ig', 'li'].map(social => (
-                                 <div key={social} className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-xs font-bold theme-text-secondary hover:bg-cyan-500 hover:text-white transition-all cursor-pointer uppercase">{social}</div>
+                                 <div key={social} className="w-8 h-8 rounded-lg bg-[#f3f4f6] dark:bg-gray-800 flex items-center justify-center text-xs font-bold theme-text-secondary hover:bg-cyan-500 hover:text-white transition-all cursor-pointer uppercase">{social}</div>
                              ))}
                         </div>
                     </div>
@@ -77,7 +77,7 @@ export const LandingFooter: React.FC = () => {
                     <div className="space-y-6">
                         <h4 className="text-sm font-bold theme-text-primary uppercase tracking-wider">Join Newsletter</h4>
                         <p className="text-xs theme-text-tertiary">Get the latest IoT updates and energy saving tips directly to your inbox.</p>
-                        <div className="flex bg-gray-100 dark:bg-gray-900 rounded-xl p-1 border theme-border">
+                        <div className="flex bg-[#f3f4f6] dark:bg-gray-900 rounded-xl p-1 border theme-border">
                             <input type="email" placeholder="email@homesync.io" className="bg-transparent flex-1 px-4 py-2 text-xs theme-text-primary outline-none" />
                             <button className="bg-cyan-500 text-white px-4 py-2 rounded-lg text-xs font-bold">Join</button>
                         </div>
