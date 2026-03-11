@@ -24,6 +24,36 @@ const SettingsPage: React.FC = () => {
         }
     }, [message]);
 
+    const [newName, setNewName] = useState(user?.name || '');
+    const [newAvatar, setNewAvatar] = useState(user?.avatar_url || '');
+    const [isProfileUpdating, setIsProfileUpdating] = useState(false);
+
+    useEffect(() => {
+        if (user) {
+            setNewName(user.name);
+            setNewAvatar(user.avatar_url || '');
+        }
+    }, [user]);
+
+    const handleProfileUpdate = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setMessage(null);
+        setIsProfileUpdating(true);
+        try {
+            await api.patch('/users/profile', { name: newName, avatar_url: newAvatar });
+            setMessage({ text: "Profile updated successfully! Refresh to see changes globally.", type: 'success' });
+            // Note: Ideally we would update the AuthContext user object here, 
+            // but requiring a refresh is a simple fallback for now if the context doesn't expose a setUser method.
+        } catch (err: any) {
+            setMessage({ 
+                text: err.response?.data?.error || "Failed to update profile", 
+                type: 'error' 
+            });
+        } finally {
+            setIsProfileUpdating(false);
+        }
+    };
+
     const handlePasswordChange = async (e: React.FormEvent) => {
         e.preventDefault();
         setMessage(null);
@@ -56,7 +86,7 @@ const SettingsPage: React.FC = () => {
     };
 
     return (
-        <div className="flex flex-col h-full w-full max-w-4xl mx-auto p-4 md:p-6 lg:p-8 space-y-6">
+        <div className="flex flex-col h-full w-full p-4 md:p-6 lg:p-8 space-y-6">
             <div className="mb-2">
                  <h1 className="text-xl font-bold theme-text-primary">Settings</h1>
                  <p className="text-xs theme-text-secondary mt-1">Manage your account and preferences</p>
@@ -104,18 +134,53 @@ const SettingsPage: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Password Change Section */}
-                <div className="lg:col-span-2">
+                {/* Settings Forms Section */}
+                <div className="lg:col-span-2 space-y-6">
+                    {message && (
+                        <div className={`p-4 rounded-xl text-sm font-medium ${
+                            message.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+                        }`}>
+                            {message.text}
+                        </div>
+                    )}
+
+                    {/* Profile Update Section */}
+                    <div className="theme-card-bg rounded-3xl theme-shadow-strong p-6">
+                        <h3 className="text-base font-bold theme-text-primary mb-6">Profile Settings</h3>
+                        
+                        <form onSubmit={handleProfileUpdate} className="space-y-4">
+                            <div>
+                                <label className="block text-xs font-semibold theme-text-secondary mb-1">Display Name</label>
+                                <input
+                                    type="text"
+                                    value={newName}
+                                    onChange={e => setNewName(e.target.value)}
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-transparent theme-text-primary focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-shadow"
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-xs font-semibold theme-text-secondary mb-1">Profile Picture URL (Optional)</label>
+                                <input
+                                    type="url"
+                                    value={newAvatar}
+                                    onChange={e => setNewAvatar(e.target.value)}
+                                    placeholder="https://example.com/my-pic.jpg"
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-transparent theme-text-primary focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-shadow"
+                                />
+                            </div>
+                            <button
+                                type="submit"
+                                disabled={isProfileUpdating || (!newName.trim() && !newAvatar.trim())}
+                                className="w-full py-3 rounded-xl bg-cyan-500 text-white font-bold shadow-lg shadow-cyan-500/20 transition-transform active:scale-95 disabled:opacity-50"
+                            >
+                                {isProfileUpdating ? 'Updating...' : 'Update Profile'}
+                            </button>
+                        </form>
+                    </div>
+
                     <div className="theme-card-bg rounded-3xl theme-shadow-strong p-6">
                         <h3 className="text-base font-bold theme-text-primary mb-6">Security</h3>
-                        
-                        {message && (
-                            <div className={`p-4 rounded-xl mb-6 text-sm font-medium ${
-                                message.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-                            }`}>
-                                {message.text}
-                            </div>
-                        )}
 
                         <form onSubmit={handlePasswordChange} className="space-y-4">
                             <div>

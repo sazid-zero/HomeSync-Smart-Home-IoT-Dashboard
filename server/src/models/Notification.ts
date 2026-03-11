@@ -51,4 +51,8 @@ export const NotificationModel = {
     const result = await query('DELETE FROM notifications WHERE id = $1 AND user_id = $2', [id, userId]);
     return (result.rowCount ?? 0) > 0;
   },
+
+  async deleteAllByUser(userId: string): Promise<void> {
+    await query('DELETE FROM notifications WHERE user_id = $1', [userId]);
+  },
 };

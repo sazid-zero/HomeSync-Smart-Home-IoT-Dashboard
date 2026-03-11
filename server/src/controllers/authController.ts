@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { UserModel } from '../models/User.js';
 import { hashPassword, comparePassword } from '../utils/hash.js';
 import { generateToken } from '../utils/jwt.js';
+import { seedDefaultData } from '../services/seedService.js';
 
 const registerSchema = z.object({
   name: z.string().min(2).max(100),
@@ -30,7 +31,10 @@ export const authController = {
       const user = await UserModel.create(name, email, passwordHash);
       const token = generateToken({ userId: user.id, email: user.email });
 
-      res.status(201).json({ user, token });
+      // Auto-seed default rooms & devices for the new user
+      await seedDefaultData(user.id);
+
+      res.status(201).json({ user, token, isNewUser: true });
     } catch (error) {
       next(error);
     }

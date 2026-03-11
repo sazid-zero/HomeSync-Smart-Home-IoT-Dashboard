@@ -52,5 +52,34 @@ export const useDevices = (roomId?: string) => {
       }
   };
 
-  return { devices, isLoading, error, refetch: fetchDevices, toggleDevice, updateDeviceValue };
+  const createDevice = async (data: {
+    room_id: string;
+    name: string;
+    type: string;
+    control_type: 'toggle' | 'slider';
+    icon_name?: string;
+  }) => {
+    try {
+      const res = await api.post('/devices', data);
+      setDevices(prev => [...prev, res.data.device]);
+      return res.data.device;
+    } catch (err: any) {
+      console.error('Error creating device:', err);
+      throw err;
+    }
+  };
+
+  const deleteDevice = async (id: string) => {
+    // Optimistic removal
+    setDevices(prev => prev.filter(d => d.id !== id));
+    try {
+      await api.delete(`/devices/${id}`);
+    } catch (err) {
+      console.error('Error deleting device:', err);
+      fetchDevices(); // revert on failure
+      throw err;
+    }
+  };
+
+  return { devices, isLoading, error, refetch: fetchDevices, toggleDevice, updateDeviceValue, createDevice, deleteDevice };
 };

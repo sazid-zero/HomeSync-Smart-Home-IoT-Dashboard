@@ -32,6 +32,7 @@ const RegisterPage: React.FC = () => {
 
         try {
             const res = await api.post('/auth/register', { name, email, password });
+            localStorage.removeItem('homesync_welcomed');
             login(res.data.token, res.data.user);
             navigate('/dashboard');
         } catch (err: any) {

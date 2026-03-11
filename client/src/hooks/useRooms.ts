@@ -27,5 +27,28 @@ export const useRooms = () => {
     fetchRooms();
   }, [fetchRooms]);
 
-  return { rooms, isLoading, error, refetch: fetchRooms };
+  const createRoom = async (name: string, icon?: string) => {
+    try {
+      const res = await api.post('/rooms', { name, icon });
+      setRooms(prev => [...prev, res.data.room]);
+      return res.data.room;
+    } catch (err: any) {
+      console.error('Error creating room:', err);
+      throw err;
+    }
+  };
+
+  const deleteRoom = async (id: string) => {
+    // Optimistic removal
+    setRooms(prev => prev.filter(r => r.id !== id));
+    try {
+      await api.delete(`/rooms/${id}`);
+    } catch (err) {
+      console.error('Error deleting room:', err);
+      fetchRooms(); // revert on failure
+      throw err;
+    }
+  };
+
+  return { rooms, isLoading, error, refetch: fetchRooms, createRoom, deleteRoom };
 };

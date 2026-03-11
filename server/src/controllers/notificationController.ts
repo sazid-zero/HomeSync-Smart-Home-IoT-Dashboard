@@ -32,4 +32,11 @@ export const notificationController = {
       res.json({ message: 'Notification deleted' });
     } catch (error) { next(error); }
   },
+
+  async deleteAll(req: Request, res: Response, next: NextFunction) {
+    try {
+      await NotificationModel.deleteAllByUser(req.user!.userId);
+      res.json({ message: 'All notifications deleted' });
+    } catch (error) { next(error); }
+  },
 };

@@ -1,29 +1,24 @@
 import { useState, useMemo } from 'react';
 import { useDevices } from '../hooks/useDevices.ts';
-
-// Define types for clarity and type safety
-type Room = {
-    id: string;       // Internal identifier
-    label: string;    // Text to display in the UI
-};
-
-// Room tabs to filter appliances
-const rooms: Room[] = [
-    { id: 'all', label: 'All' },
-    { id: 'lounge', label: 'Lounge' },
-    { id: 'hall', label: 'Hall' },
-    { id: 'bedroom', label: 'Bedroom' },
-    { id: 'kitchen', label: 'Kitchen' },
-    { id: 'bathroom', label: 'Bathroom' }
-];
+import { useRooms } from '../hooks/useRooms.ts';
 
 export default function ApplianceControlCard() {
-    const { devices, toggleDevice, updateDeviceValue, isLoading } = useDevices();
+    const { devices, toggleDevice, updateDeviceValue, isLoading: loadingDevices } = useDevices();
+    const { rooms, isLoading: loadingRooms } = useRooms();
     const [selectedRoom, setSelectedRoom] = useState<string>('all');
+
+    const isLoading = loadingDevices || loadingRooms;
+
+    const dynamicRooms = useMemo(() => {
+        return [
+            { id: 'all', label: 'All' },
+            ...rooms.map(r => ({ id: r.id, label: r.name }))
+        ];
+    }, [rooms]);
 
     const visibleAppliances = useMemo(() => {
         return devices.filter(d => 
-            selectedRoom === 'all' ? true : d.room_id?.toLowerCase() === selectedRoom
+            selectedRoom === 'all' ? true : d.room_id === selectedRoom
         );
     }, [devices, selectedRoom]);
 
@@ -44,7 +39,7 @@ export default function ApplianceControlCard() {
                     <h1 className="text-xs font-bold theme-text-tertiary uppercase tracking-widest">Zone Matrix</h1>
                 </div>
                 <div className="flex space-x-2 overflow-x-auto hide-scrollbar pb-1">
-                    {rooms.map(room => (
+                    {dynamicRooms.map(room => (
                         <button
                             key={room.id}
                             onClick={() => setSelectedRoom(room.id)}

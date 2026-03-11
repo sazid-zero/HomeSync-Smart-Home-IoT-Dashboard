@@ -4,5 +4,6 @@ export declare const notificationController: {
     markAsRead(req: Request, res: Response, next: NextFunction): Promise<void>;
     markAllAsRead(req: Request, res: Response, next: NextFunction): Promise<void>;
     delete(req: Request, res: Response, next: NextFunction): Promise<void>;
+    deleteAll(req: Request, res: Response, next: NextFunction): Promise<void>;
 };
 //# sourceMappingURL=notificationController.d.ts.map

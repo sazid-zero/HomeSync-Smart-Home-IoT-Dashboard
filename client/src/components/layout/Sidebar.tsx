@@ -18,6 +18,7 @@ export const Sidebar: React.FC = () => {
     ];
 
     return (
+        <>
         <div className="hidden lg:flex w-52 theme-bg-secondary min-h-screen py-8 px-4 flex-col flex-shrink-0 z-10 sticky top-0 border-r theme-border">
             {/* Logo / Brand */}
             <Link to="/" className="flex items-center px-2 mb-10 space-x-3 hover:opacity-80 transition-opacity cursor-pointer">
@@ -90,6 +91,7 @@ export const Sidebar: React.FC = () => {
                     <span className="text-[13px] font-medium">Logout</span>
                 </button>
             </div>
+        </div>
 
             <ConfirmationModal 
                 isOpen={isLogoutModalOpen}
@@ -100,6 +102,6 @@ export const Sidebar: React.FC = () => {
                 onConfirm={logout}
                 onCancel={() => setIsLogoutModalOpen(false)}
             />
-        </div>
+        </>
     );
 };

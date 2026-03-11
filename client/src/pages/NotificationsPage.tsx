@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import api from '../services/api.ts';
 import { useSocket } from '../hooks/useSocket.ts';
 import type { Notification } from '../types/index.ts';
+import { ConfirmationModal } from '../components/ui/ConfirmationModal.tsx';
 
 const NotificationsPage: React.FC = () => {
     const [notifications, setNotifications] = useState<Notification[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [showClearModal, setShowClearModal] = useState(false);
 
     const fetchNotifications = async () => {
         setIsLoading(true);
@@ -52,9 +54,7 @@ const NotificationsPage: React.FC = () => {
     };
 
     const clearAll = async () => {
-        const confirm = window.confirm("Are you sure you want to delete all notifications?");
-        if (!confirm) return;
-        
+        setShowClearModal(false);
         setNotifications([]);
         try {
              await api.delete(`/notifications`);
@@ -75,7 +75,7 @@ const NotificationsPage: React.FC = () => {
     if (isLoading) return <div className="flex-1 flex justify-center items-center h-full"><div className="w-8 h-8 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin"></div></div>;
 
     return (
-        <div className="flex flex-col h-full w-full max-w-4xl mx-auto p-4 md:p-6 lg:p-8 space-y-6">
+        <div className="flex flex-col h-full w-full p-4 md:p-6 lg:p-8 space-y-6">
             <div className="flex justify-between items-end mb-4 border-b border-gray-200 dark:border-gray-800 pb-4">
                 <div>
                      <h1 className="text-xl font-bold theme-text-primary">Notifications</h1>
@@ -89,7 +89,7 @@ const NotificationsPage: React.FC = () => {
                         Mark all read
                     </button>
                     <button 
-                        onClick={clearAll}
+                        onClick={() => setShowClearModal(true)}
                         className="text-xs font-semibold text-red-500 bg-red-50 dark:bg-red-500/10 px-3 py-1.5 rounded-lg hover:opacity-80 transition-opacity"
                     >
                         Clear All
@@ -144,6 +144,16 @@ const NotificationsPage: React.FC = () => {
                     ))
                 )}
             </div>
+
+            <ConfirmationModal
+                isOpen={showClearModal}
+                title="Clear All Notifications"
+                message="Are you sure you want to delete all notifications? This action cannot be undone."
+                confirmText="Delete All"
+                variant="danger"
+                onConfirm={clearAll}
+                onCancel={() => setShowClearModal(false)}
+            />
         </div>
     );
 };

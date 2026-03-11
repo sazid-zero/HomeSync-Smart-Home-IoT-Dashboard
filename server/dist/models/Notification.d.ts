@@ -14,5 +14,6 @@ export declare const NotificationModel: {
     markAsRead(id: string, userId: string): Promise<boolean>;
     markAllAsRead(userId: string): Promise<void>;
     delete(id: string, userId: string): Promise<boolean>;
+    deleteAllByUser(userId: string): Promise<void>;
 };
 //# sourceMappingURL=Notification.d.ts.map

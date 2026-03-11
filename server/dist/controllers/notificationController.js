@@ -45,5 +45,14 @@ export const notificationController = {
             next(error);
         }
     },
+    async deleteAll(req, res, next) {
+        try {
+            await NotificationModel.deleteAllByUser(req.user.userId);
+            res.json({ message: 'All notifications deleted' });
+        }
+        catch (error) {
+            next(error);
+        }
+    },
 };
 //# sourceMappingURL=notificationController.js.map
