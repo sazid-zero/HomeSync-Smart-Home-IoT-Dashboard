@@ -27,7 +27,11 @@ export const Sidebar: React.FC = () => {
 
             {/* Profile Section */}
             <div className="flex items-center px-2 mb-10 space-x-3 bg-cyan-500/5 dark:bg-cyan-400/10 p-3 rounded-2xl border border-cyan-500/10">
-                <img src={user?.avatar_url || "/profile.jpg"} alt="User" className="rounded-xl h-9 w-9 object-cover border border-cyan-500/20" />
+                <img 
+                    src={user?.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.name || 'User')}&background=0ea5e9&color=fff&bold=true`} 
+                    alt="User" 
+                    className="rounded-xl h-9 w-9 object-cover border border-cyan-500/20" 
+                />
                 <div className="flex flex-col min-w-0">
                     <span className="text-[10px] uppercase font-bold text-cyan-500 tracking-wider">Resident</span>
                     <span className="text-xs font-bold theme-text-primary truncate">{user?.name || "User"}</span>
