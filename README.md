@@ -24,7 +24,9 @@ HomeSync is a comprehensive **Full-Stack IoT Dashboard** designed as a "Digital 
 - **Bi-Directional Real-Time Sync**: Utilises **Socket.io** to instantly synchronise device states across multiple clients/tabs without page refreshes.
 - **Energy Analytics Engine**: A dedicated analytics pipeline that tracks and visualises power consumption trends over 7, 14, and 30-day periods using **Recharts**.
 - **Adaptive Environmental Monitoring**: Real-time tracking of indoor environmental conditions with automated system alerts for critical levels.
-- **Secure Authentication**: Full JWT-based authentication system with protected routes and persistent user sessions.
+- **Secure Authentication & Profiling**: Full JWT-based authentication system with protected routes, persistent user sessions, and customisable user profiles.
+- **Occupancy Management**: Intuitive interface to monitor and manage household occupancy states directly from the dashboard.
+- **Immersive UX**: A highly polished, responsive interface featuring dynamic scroll-triggered landing page animations and a modern futuristic aesthetic.
 
 ---
 
@@ -34,6 +36,7 @@ HomeSync is a comprehensive **Full-Stack IoT Dashboard** designed as a "Digital 
 - **React 18 & TypeScript**: For type-safe, component-driven UI development.
 - **Tailwind CSS**: Custom dark/light mode theme system with glassmorphism effects.
 - **Vite**: High-performance build tool for instant HMR.
+- **Framer Motion & Lenis**: For fluid, scroll-triggered animations and buttery smooth continuous scrolling on the marketing landing page.
 
 ### **Backend**
 - **Node.js & Express**: Scalable REST API architecture.

@@ -1,5 +1,6 @@
 import React from 'react';
 import { HiLightningBolt, HiBell, HiViewGrid } from 'react-icons/hi';
+import { motion } from 'framer-motion';
 
 export const CreativeGraphics: React.FC = () => {
     return (
@@ -37,7 +38,13 @@ export const CreativeGraphics: React.FC = () => {
                         </div>
                     </div>
 
-                    <div className="order-1 lg:order-2 space-y-8 text-center lg:text-left">
+                    <motion.div 
+                        initial={{ opacity: 0, x: 50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.8 }}
+                        className="order-1 lg:order-2 space-y-8 text-center lg:text-left"
+                    >
                         <h2 className="text-xs font-bold text-cyan-500 uppercase tracking-[0.4em]">Engineered for Reliability</h2>
                         <h3 className="text-4xl md:text-6xl font-extrabold tracking-tighter theme-text-primary leading-[1.1]">
                             The Future of <br />
@@ -65,7 +72,7 @@ export const CreativeGraphics: React.FC = () => {
                                 <div className="text-[10px] font-bold theme-text-tertiary uppercase tracking-widest">Scalability</div>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
 
