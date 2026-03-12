@@ -47,14 +47,14 @@ export const Hero: React.FC = () => {
 
                     <div className="flex items-center space-x-6 pt-8">
                         <div className="flex -space-x-3">
-                            {[1,2,3,4].map(i => (
+                            {['sazid.jpg', 'shafayat.jpg', 'jui.jpg', 'sharmin.jpg'].map((img, i) => (
                                 <div key={i} className="w-10 h-10 rounded-full border-2 theme-border theme-bg-tertiary overflow-hidden">
-                                    <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt="user" />
+                                    <img src={`/profile/${img}`} alt="user" className="w-full h-full object-cover" />
                                 </div>
                             ))}
                         </div>
                         <div className="flex flex-col">
-                            <span className="text-sm font-bold theme-text-primary">Joined by 2,400+ Homeowners</span>
+                            <span className="text-sm font-bold theme-text-primary">Joined by 4,200+ Homeowners</span>
                             <div className="flex items-center text-cyan-500 text-xs font-bold">
                                 <span>★★★★★</span>
                                 <span className="ml-2 theme-text-secondary text-[10px] uppercase tracking-tighter">4.9/5 Average Rating</span>

@@ -20,7 +20,6 @@ export const Sidebar: React.FC = () => {
     return (
         <>
         <div className="hidden lg:flex w-52 theme-bg-secondary min-h-screen py-8 px-4 flex-col flex-shrink-0 z-10 sticky top-0 border-r theme-border">
-            {/* Logo / Brand */}
             <Link to="/" className="flex items-center px-2 mb-10 space-x-3 hover:opacity-80 transition-opacity cursor-pointer">
                 <div className="w-8 h-8 rounded-lg bg-cyan-500 flex items-center justify-center text-white font-bold text-lg">H</div>
                 <span className="text-lg font-bold tracking-tight theme-text-primary">HomeSync</span>
